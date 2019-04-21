@@ -1,0 +1,41 @@
+a,
+button {
+	cursor: pointer;
+}
+li {
+	margin-bottom: 10px;
+}
+.center {
+	text-align: center;
+}
+.projects {
+	margin-top: 20px;
+}
+.grid,
+.person {
+	display: flex;
+	flex-wrap: wrap;
+}
+.person {
+	width: 300px;
+	margin: 0 0 20px 0;
+}
+.personImg {
+	width: 90px;
+	padding: 0 10px 0 0;
+}
+.personImg img {
+	width: 100%;
+}
+.personInfo dl {
+	margin: 0;
+}
+.jsHide {
+	display: none;
+}
+.backBtn {
+	margin: 0 0 20px 0;
+}
+.planetName {
+	margin: 10px 0;
+}
