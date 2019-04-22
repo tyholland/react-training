@@ -3,6 +3,7 @@ import React from 'react';
 import List from './List';
 import Planet from './Planet';
 import ProjectChoice from './ProjectChoice';
+import Form from './Form';
 import '../index.css';
 
 function App() {
@@ -15,10 +16,14 @@ function App() {
 				<li>
 					<ProjectChoice name='Random Planets' projName='planets' />
 				</li>
+				<li>
+					<ProjectChoice name='Flight Form' projName='form' />
+				</li>
 			</ol>
 
 			<List />
 			<Planet />
+			<Form />
 		</div>
 	)
 }

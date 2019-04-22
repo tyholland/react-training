@@ -39,3 +39,9 @@ li {
 .planetName {
 	margin: 10px 0;
 }
+.block {
+	margin-bottom: 20px;
+}
+input[name=age] {
+	width: 40px;
+}
