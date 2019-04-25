@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
-
-import GoHome from './GoHome';
+import {Link} from 'react-router-dom';
 import Character from './Character';
 
 class List extends Component {
-	constructor() {
-		super()
-
-		this.state = {
-			character: []
-		}
+	state = {
+		character: []
 	}
 
 	componentDidMount() {
@@ -23,13 +18,15 @@ class List extends Component {
 	}
 
 	render() {
-		const people = this.state.character.map(function(item, index) {
-			return <Character key={index} count={index} name={item.name} height={item.height} weight={item.mass} hair_color={item.hair_color} eye_color={item.eye_color} gender={item.gender} birth_year={item.birth_year} />
+		const people = this.state.character.map((item, index) => {
+			return <Character key={index} count={index} attr={item}  />
 		})
 
 		return (
-			<div className="characterList jsHide">
-				<GoHome projName="characterList" />
+			<div className="characterList">
+				<p>
+					<Link to="/">&laquo; Back to Project Examples</Link>
+				</p>
 				<div className="grid">
 					{people}
 				</div>

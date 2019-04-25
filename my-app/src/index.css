@@ -16,10 +16,12 @@ li {
 	display: flex;
 	flex-wrap: wrap;
 }
-.person,
-.personAttr {
+.person {
 	width: 300px;
 	margin: 0 0 20px 0;
+}
+.personAttr {
+	width: 200px;
 }
 .personImg {
 	width: 90px;

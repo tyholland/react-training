@@ -1,11 +1,16 @@
-function createAttributes(data, name) {
+let createAttributes
+let characterInfo
+let filterAttributes
+let getCharacterPic
+
+createAttributes = (data, name) => {
 	const attr = name
 
 	return data
-		.map(function(item) {
+		.map((item) => {
 			return item[attr]
 		})
-		.reduce(function(array, item, index) {
+		.reduce((array, item, index) => {
 			if (array.indexOf(item) === -1) {
 				array.push(item)
 			}
@@ -14,7 +19,7 @@ function createAttributes(data, name) {
 		}, [])
 }
 
-function characterInfo(isLoading, name, img, arr) {
+characterInfo = (isLoading, name, img, arr) => {
 	return {
 		loading: isLoading,
 		personName: name,
@@ -23,14 +28,12 @@ function characterInfo(isLoading, name, img, arr) {
 	}
 }
 
-function filterAttributes(character, starWarsArr) {
+filterAttributes = (character, starWarsArr) => {
 	let filteredArr = starWarsArr
-	let attributes = []
+	const attributes = Object.keys(character)
 
-	attributes = Object.keys(character)
-
-	attributes.forEach(function(item) {
-		filteredArr = filteredArr.filter(function(data) {
+	attributes.forEach((item) => {
+		filteredArr = filteredArr.filter((data) => {
 			return character[item] === data[item]
 		})
 	})
@@ -38,10 +41,10 @@ function filterAttributes(character, starWarsArr) {
 	return filteredArr
 }
 
-function getCharacterPic(charName, starWars) {
+getCharacterPic = (charName, starWars) => {
 	let image = ''
 
-	starWars.forEach(function(item, index) {
+	starWars.forEach((item, index) => {
 		if (charName === item.name) {
 			const count = index + 1
 			image = 'https://starwars-visualguide.com/assets/img/characters/' + count + '.jpg'

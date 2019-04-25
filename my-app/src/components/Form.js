@@ -1,42 +1,37 @@
-import React, {Component} from "react"
-
-import FlightInfo from "./FlightInfo"
-import Results from "./Results"
-import GoHome from "./GoHome"
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import FlightInfo from './FlightInfo';
+import Results from './Results';
 
 class Form extends Component {
-    constructor() {
-        super()
-        this.state = {
-            firstName: '',
-            lastName: '',
-            age: '',
-            gender: '',
-            toothbrush: false,
-            comb: false,
-            belt: false,
-            soap: false,
-            location: ''
-        }
-        
-        this.handleChange = this.handleChange.bind(this)
+    state = {
+        firstName: '',
+        lastName: '',
+        age: '',
+        gender: '',
+        toothbrush: false,
+        comb: false,
+        belt: false,
+        soap: false,
+        location: ''
     }
     
-    handleChange(event) {
+    handleChange = (event) => {
         const {name, value, type, checked} = event.target
         
         type === 'checkbox' ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
-        
     }
     
     render() {
         return (
-            <div className="form jsHide">
-                <GoHome projName="form" />
+            <div className="form">
+                <p>
+                    <Link to="/">&laquo; Back to Project Examples</Link>
+                </p>
                 <form>
-                    <FlightInfo firstName={this.state.firstName} lastName={this.state.lastName} age={this.state.age} gender={this.state.gender} location={this.state.location} handleChange={this.handleChange} />
+                    <FlightInfo attr={this.state} handleChange={this.handleChange} />
                 </form>
-                <Results firstName={this.state.firstName} lastName={this.state.lastName} age={this.state.age} gender={this.state.gender} location={this.state.location} toothbrush={this.state.toothbrush} comb={this.state.comb} belt={this.state.belt} soap={this.state.soap} />
+                <Results attr={this.state} />
             </div>
         )
     }

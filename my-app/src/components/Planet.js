@@ -1,18 +1,11 @@
 import React, {Component} from 'react';
-
-import GoHome from './GoHome';
+import {Link} from 'react-router-dom';
 
 class Planet extends Component {
-	constructor() {
-		super()
-
-		this.state = {
-			count: 0,
-			planetArr: [],
-			planetName: ''
-		}
-
-		this.changePlanet = this.changePlanet.bind(this)
+	state = {
+		count: 0,
+		planetArr: [],
+		planetName: ''
 	}
 
 	componentDidMount() {
@@ -26,7 +19,7 @@ class Planet extends Component {
 			)
 	}
 
-	changePlanet() {
+	changePlanet = () => {
 		const counter = Math.floor(Math.random() * this.state.planetArr.length)
 
 		this.setState({
@@ -40,8 +33,10 @@ class Planet extends Component {
 		const randomPlanet = 'https://starwars-visualguide.com/assets/img/planets/' + counter + '.jpg'
 
 		return (
-			<div className="planets jsHide">
-				<GoHome projName="planets" />
+			<div className="planets">
+				<p>
+					<Link to="/">&laquo; Back to Project Examples</Link>
+				</p>
 				<div className="center">
 					<div>
 						<img src={randomPlanet} alt={this.state.planetName} width="30%" />

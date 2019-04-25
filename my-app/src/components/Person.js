@@ -1,31 +1,22 @@
-import React, {Component} from "react"
-
-import Attributes from "./Attributes"
-import GoHome from "./GoHome"
-import {createAttributes, characterInfo, filterAttributes, getCharacterPic} from "./functions"
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import Attributes from './Attributes';
+import {createAttributes, characterInfo, filterAttributes, getCharacterPic} from './Person/functions';
 
 class Person extends Component {
-	constructor() {
-		super()
-
-		this.state = {
-			character: {},
-			starWars: [],
-			updatedArr: [],
-			height: '',
-			mass: '',
-			gender: '',
-			birth_year: '',
-			hair_color: '',
-			eye_color: '',
-			loading: true,
-			personName: '',
-			personImg: ''
-		}
-
-		this.handleChange = this.handleChange.bind(this)
-		this.setCharacterInfo = this.setCharacterInfo.bind(this)
-		this.resetAttributes = this.resetAttributes.bind(this)
+	state = {
+		character: {},
+		starWars: [],
+		updatedArr: [],
+		height: '',
+		mass: '',
+		gender: '',
+		birth_year: '',
+		hair_color: '',
+		eye_color: '',
+		loading: true,
+		personName: '',
+		personImg: ''
 	}
 
 	componentDidMount() {
@@ -39,7 +30,7 @@ class Person extends Component {
 			})
 	}
 
-	handleChange(event) {
+	handleChange = (event) => {
 		const {name, value} = event.target
 		const character = this.state.character
 		
@@ -49,7 +40,7 @@ class Person extends Component {
 		this.setCharacterInfo(filterAttributes(character, this.state.starWars))
 	}
 
-	setCharacterInfo(arr) {
+	setCharacterInfo = (arr) => {
 		if (arr.length === 1) {
 			const characterName = arr[0].name
 
@@ -59,7 +50,7 @@ class Person extends Component {
 		}
 	}
 
-	resetAttributes() {
+	resetAttributes = () => {
 		this.setState({
 			loading: true,
 			personName: '',
@@ -76,26 +67,54 @@ class Person extends Component {
 	}
 
 	render() {
-		const showImg = this.state.loading ? '' : <img src={this.state.personImg} alt={this.state.personName} width='60%' />
-		const showName = this.state.loading ? 'Choose from the attributes to display a character' : this.state.personName
-		const height = createAttributes(this.state.updatedArr, 'height')
-		const mass = createAttributes(this.state.updatedArr, 'mass')
-		const gender = createAttributes(this.state.updatedArr, 'gender')
-		const birth_year = createAttributes(this.state.updatedArr, 'birth_year')
-		const hair_color = createAttributes(this.state.updatedArr, 'hair_color')
-		const eye_color = createAttributes(this.state.updatedArr, 'eye_color')
+		const showImg = this.state.loading ? 'Choose from the list of attributes' : <img src={this.state.personImg} alt={this.state.personName} width='60%' />
+		const showName = this.state.loading ? 'To display a hidden character' : this.state.personName
+		const data = [
+			{
+				type: createAttributes(this.state.updatedArr, 'gender'),
+				name: 'gender',
+				default: 'Select a Gender'
+			},
+			{
+				type: createAttributes(this.state.updatedArr, 'birth_year'),
+				name: 'birth_year',
+				default: 'Select a D.O.B'
+			},
+			{
+				type: createAttributes(this.state.updatedArr, 'height'),
+				name: 'height',
+				default: 'Select a Height'
+			},
+			{
+				type: createAttributes(this.state.updatedArr, 'mass'),
+				name: 'mass',
+				default: 'Select a Weight'
+			},
+			{
+				type: createAttributes(this.state.updatedArr, 'hair_color'),
+				name: 'hair_color',
+				default: 'Select a Hair Color'
+			},
+			{
+				type: createAttributes(this.state.updatedArr, 'eye_color'),
+				name: 'eye_color',
+				default: 'Select a Eye Color'
+			}
+		]
+		const personAttributes = data.map((item, index) => {
+			const nameAttr = item.name
+
+			return <Attributes key={index} attr={item} val={this.state[nameAttr]} change={this.handleChange} />
+		})
 
 		return (
-			<div className="createPerson jsHide">
-				<GoHome projName="createPerson" />
+			<div className="createPerson">
+				<p>
+					<Link to="/">&laquo; Back to Project Examples</Link>
+				</p>
 				<div className="grid">
 					<div className="personAttr">
-						<Attributes name="gender" default="Select a Gender" attr={gender} val={this.state.gender} change={this.handleChange} />
-						<Attributes name="birth_year" default="Select a D.O.B" attr={birth_year} val={this.state.birth_year} change={this.handleChange} />
-						<Attributes name="height" default="Select a Height" attr={height} val={this.state.height} change={this.handleChange} />
-						<Attributes name="mass" default="Select a Weight" attr={mass} val={this.state.mass} change={this.handleChange} />
-						<Attributes name="hair_color" default="Select a Hair Color" attr={hair_color} val={this.state.hair_color} change={this.handleChange} />
-						<Attributes name="eye_color" default="Select a Eye Color" attr={eye_color} val={this.state.eye_color} change={this.handleChange} />
+						{personAttributes}
 						<div>
 							<button onClick={this.resetAttributes}>Reset</button>
 						</div>
