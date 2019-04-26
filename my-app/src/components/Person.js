@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Attributes from './Attributes';
-import {createAttributes, characterInfo, filterAttributes, getCharacterPic} from './Person/functions';
+import {characterInfo, filterAttributes, getCharacterPic, getAttributeData} from './Person/functions';
 
 class Person extends Component {
 	state = {
@@ -69,39 +69,8 @@ class Person extends Component {
 	render() {
 		const showImg = this.state.loading ? 'Choose from the list of attributes' : <img src={this.state.personImg} alt={this.state.personName} width='60%' />
 		const showName = this.state.loading ? 'To display a hidden character' : this.state.personName
-		const data = [
-			{
-				type: createAttributes(this.state.updatedArr, 'gender'),
-				name: 'gender',
-				default: 'Select a Gender'
-			},
-			{
-				type: createAttributes(this.state.updatedArr, 'birth_year'),
-				name: 'birth_year',
-				default: 'Select a D.O.B'
-			},
-			{
-				type: createAttributes(this.state.updatedArr, 'height'),
-				name: 'height',
-				default: 'Select a Height'
-			},
-			{
-				type: createAttributes(this.state.updatedArr, 'mass'),
-				name: 'mass',
-				default: 'Select a Weight'
-			},
-			{
-				type: createAttributes(this.state.updatedArr, 'hair_color'),
-				name: 'hair_color',
-				default: 'Select a Hair Color'
-			},
-			{
-				type: createAttributes(this.state.updatedArr, 'eye_color'),
-				name: 'eye_color',
-				default: 'Select a Eye Color'
-			}
-		]
-		const personAttributes = data.map((item, index) => {
+		const attributeData = getAttributeData(this.state.updatedArr)
+		const personAttributes = attributeData.map((item, index) => {
 			const nameAttr = item.name
 
 			return <Attributes key={index} attr={item} val={this.state[nameAttr]} change={this.handleChange} />

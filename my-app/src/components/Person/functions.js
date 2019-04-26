@@ -2,6 +2,7 @@ let createAttributes
 let characterInfo
 let filterAttributes
 let getCharacterPic
+let getAttributeData
 
 createAttributes = (data, name) => {
 	const attr = name
@@ -54,9 +55,44 @@ getCharacterPic = (charName, starWars) => {
 	return image
 }
 
+getAttributeData = (arr) => {
+	return [
+		{
+			type: createAttributes(arr, 'gender'),
+			name: 'gender',
+			default: 'Select a Gender'
+		},
+		{
+			type: createAttributes(arr, 'birth_year'),
+			name: 'birth_year',
+			default: 'Select a D.O.B'
+		},
+		{
+			type: createAttributes(arr, 'height'),
+			name: 'height',
+			default: 'Select a Height'
+		},
+		{
+			type: createAttributes(arr, 'mass'),
+			name: 'mass',
+			default: 'Select a Weight'
+		},
+		{
+			type: createAttributes(arr, 'hair_color'),
+			name: 'hair_color',
+			default: 'Select a Hair Color'
+		},
+		{
+			type: createAttributes(arr, 'eye_color'),
+			name: 'eye_color',
+			default: 'Select a Eye Color'
+		}
+	]
+}
+
 export {
-	createAttributes,
 	characterInfo,
 	filterAttributes,
-	getCharacterPic
+	getCharacterPic,
+	getAttributeData
 }
