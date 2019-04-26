@@ -13,7 +13,7 @@ class Planet extends Component {
 			.then(response => response.json())
 			.then(data =>
 				this.setState({
-					planetArr: data.results,
+					planetArr: data.results.map((item) => { return item.name }),
 					planetName: data.results[this.state.count].name
 				})
 			)
@@ -24,7 +24,7 @@ class Planet extends Component {
 
 		this.setState({
 			count: counter,
-			planetName: this.state.planetArr[counter].name
+			planetName: this.state.planetArr[counter]
 		})
 	}
 
